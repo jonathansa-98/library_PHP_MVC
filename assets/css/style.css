@@ -1,0 +1,74 @@
+/* Center style*/
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+/* Page not found style*/
+.error_404{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.error_404 h1{
+    text-align: center;
+    font-size: 15em;
+}
+
+.not_found{
+    text-align: center;
+    font-size: 2em;
+}
+
+/* HTML style*/
+html{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* Header css*/
+header{
+    height: 150px;
+    background-color: lightsteelblue;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 40px;
+}
+
+header a img{
+    height: 150px;
+}
+
+header nav ul li{
+    margin-left: 20px;
+}
+
+/* Body css*/
+body{
+    min-height: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 30px;
+}
+
+body img{
+    margin: 5px;
+}
+
+/* Footer css*/
+footer{
+    text-align: center;
+    background-color: #9999ff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}

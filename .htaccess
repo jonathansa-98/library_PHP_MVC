@@ -1,0 +1,18 @@
+# Activate Friendly routes
+<IfModule mod_rewrite.c>
+
+#Activate rewrite
+RewriteEngine on
+ErrorDocument 404 http://localhost/library_PHP_MVC/error/
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+# index.php?controller="user"&action="saveLogin"
+#
+#   TO
+#
+# index.php/user/saveLogin
+RewriteRule ^(.*)/(.*) index.php?controller=$1&action=$2
+
+</IfModule>
