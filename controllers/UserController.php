@@ -55,17 +55,8 @@ class UserController{
             $user->setPass($_POST['pass']);
             $userIdentified = $user->login();
             
-            // stdClass to User
-            if(is_object($userIdentified)){
-                $userIdentified = User::stdObjToUser($userIdentified);
-            }
-                //echo "---";
-                //var_dump($userIdentified);
-                
             // Create session
             if($userIdentified && is_a($userIdentified, "User")){
-                //var_dump($userIdentified);
-                //die();
                 $_SESSION['userIdentity'] = $userIdentified;
                 $_SESSION['login'] = $success_msg;
                 if($userIdentified->getRole() == "librarian"){

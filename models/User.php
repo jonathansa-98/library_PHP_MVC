@@ -14,16 +14,6 @@ class User {
         $this->db = DB::connect();
     }
     
-    static function stdObjToUser($std) {
-        $user = new User();
-        $user->setLogin($std->login);
-        $user->setPass($std->pass);
-        $user->setDni($std->dni);
-        $user->setEmail($std->email);
-        $user->setRole($std->role);
-        return $user;
-    } 
-            
     function getLogin() {
         return $this->login;
     }
@@ -120,12 +110,10 @@ class User {
         $sql = "select login, AES_DECRYPT(pass, 'esselte14') as pass, dni, email, role from user where login = '{$login}' ";
         $loging_in = $this->db->query($sql);
         if($loging_in && $loging_in->num_rows == 1){
-            $user = $loging_in->fetch_object();
+            $user = $loging_in->fetch_object("User");
             
             // Check password
-            $pass_right = ($pass == $user->pass);
-            //var_dump($pass_right);
-            if($pass_right){
+            if($pass == $user->pass){
                 $result = $user;
             }
         }

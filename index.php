@@ -1,12 +1,13 @@
 <?php
 
 /* Loading files, and preparing enviroment*/
-session_cache_limiter("nocache");
-session_start();
 require_once 'autoload.php';
 require_once 'config/constants.php';
 require_once 'db/DB.php';
 require_once 'helpers/Utils.php';
+require_once 'models/User.php';
+session_cache_limiter("nocache");
+session_start();
 
 /* Loading header*/
 require_once 'views/layout/header.php';

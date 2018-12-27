@@ -46,8 +46,30 @@ header a img{
     height: 150px;
 }
 
+header nav ul{
+    display: flex;
+    align-items: flex-end;
+}
+
 header nav ul li{
     margin-left: 20px;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: whitesmoke;
+}
+
+.login p{
+    font-size: 20px;
+}
+
+.login li{
+    margin: 0;
 }
 
 /* Body css*/

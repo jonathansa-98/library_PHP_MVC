@@ -14,6 +14,13 @@
             <a href="<?=BASE_URL?>" class="logo"><img src="<?=BASE_URL?>assets/img/logo.png"></a>
             <nav>
                 <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a href="<?=BASE_URL?>book/seeAll" class="btn btn-primary" role="button" aria-pressed="true">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?=BASE_URL?>user/profile" class="btn btn-primary" role="button" aria-pressed="true">Profile</a>
+                    </li>
+                    <div class="login">
                     <?php if(!isset($_SESSION['userIdentity'])): ?>
                         <li class="nav-item">
                             <a href="<?=BASE_URL?>user/login" class="btn btn-success" role="button" aria-pressed="true">Login</a>
@@ -22,10 +29,12 @@
                             <a href="<?=BASE_URL?>user/register" class="btn btn-success" role="button" aria-pressed="true">Register</a>
                         </li>
                     <?php else: ?>
+                        <p><?=$_SESSION['userIdentity']->getLogin();?></p>
                         <li class="nav-item">
                             <a href="<?=BASE_URL?>user/logout" class="btn btn-danger " role="button" aria-pressed="true">Logout</a>
                         </li>
                     <?php endif; ?>
+                    </div>
                 </ul>
             </nav>
         </header>
