@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-12-2018 a las 16:16:57
+-- Tiempo de generación: 28-12-2018 a las 19:56:55
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -54,7 +54,8 @@ INSERT INTO `author` (`id`, `name`) VALUES
 CREATE TABLE `book` (
   `isbn` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `category_id` varchar(25) NOT NULL,
+  `description` text NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
   `author_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -62,9 +63,9 @@ CREATE TABLE `book` (
 -- Volcado de datos para la tabla `book`
 --
 
-INSERT INTO `book` (`isbn`, `name`, `category_id`, `author_id`) VALUES
-(1823681231, 'The Lord Of the Rings', '1', 3),
-(2147483647, 'Harry Potter and the chamber of secrets', '1', 2);
+INSERT INTO `book` (`isbn`, `name`, `description`, `category_id`, `author_id`) VALUES
+(1823681231, 'The Lord Of the Rings', 'A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.', 1, 3),
+(2147483647, 'Harry Potter and the chamber of secrets', 'An ancient prophecy seems to be coming true when a mysterious presence begins stalking the corridors of a school of magic and leaving its victims paralyzed.', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -119,8 +120,7 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`id`, `name`) VALUES
 (1, 'fantasy'),
 (2, 'horror'),
-(3, 'love'),
-(17, 'pepe');
+(3, 'love');
 
 -- --------------------------------------------------------
 
@@ -174,6 +174,7 @@ ALTER TABLE `author`
 --
 ALTER TABLE `book`
   ADD PRIMARY KEY (`isbn`),
+  ADD KEY `FK_category_book` (`category_id`),
   ADD KEY `FK_author_book` (`author_id`);
 
 --
@@ -237,7 +238,7 @@ ALTER TABLE `borrow`
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `reserve`
@@ -253,7 +254,8 @@ ALTER TABLE `reserve`
 -- Filtros para la tabla `book`
 --
 ALTER TABLE `book`
-  ADD CONSTRAINT `FK_author_book` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_author_book` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_category_book` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `book_copy`

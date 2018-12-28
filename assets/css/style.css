@@ -84,6 +84,7 @@ body{
     padding: 0;
     margin: 0;
     padding-bottom: 30px;
+    background-color: whitesmoke;
 }
 
 #main-container h1{
@@ -94,9 +95,17 @@ body img{
     margin: 5px;
 }
 
+form{
+    width: 35%;
+}
+
 .table{
     margin-top: 2rem;
     width: 75% !important;
+}
+
+.table_book{
+    width: 90% !important;
 }
 
 /* Footer css*/

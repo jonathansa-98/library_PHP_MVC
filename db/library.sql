@@ -52,17 +52,18 @@ INSERT INTO `category` (`id`, `name`) VALUES
 CREATE TABLE `book` (
   `isbn`        int             NOT NULL,
   `name`        varchar(100)    NOT NULL,
-  `category_id` varchar(25)     NOT NULL,
+  `description` text            NOT NULL,
+  `category_id` int             DEFAULT NULL,
   `author_id`   int             DEFAULT NULL,
 
    CONSTRAINT `PK_book` PRIMARY KEY (isbn),
+   CONSTRAINT `FK_category_book` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
    CONSTRAINT `FK_author_book` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-   
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `book` (`isbn`, `name`, `category_id`, `author_id`) VALUES
-(1823681231, 'The Lord Of the Rings', 1, 3),
-(2147483647, 'Harry Potter and the chamber of secrets', 1, 2);
+INSERT INTO `book` (`isbn`, `name`, `description`, `category_id`, `author_id`) VALUES
+(1823681231, 'The Lord Of the Rings', 'A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.', 1, 3),
+(2147483647, 'Harry Potter and the chamber of secrets', 'An ancient prophecy seems to be coming true when a mysterious presence begins stalking the corridors of a school of magic and leaving its victims paralyzed.', 1, 2);
 
 -- --------------------------------------------------------
 

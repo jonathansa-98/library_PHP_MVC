@@ -44,4 +44,11 @@ class Utils{
             unset($_SESSION[$name_session]);
         }
     }
+    
+    static function showCategories() {
+        require_once 'models/category.php';
+        $category = new Category();
+        $categories = $category->getAll();
+        return $categories;
+    }
 }
