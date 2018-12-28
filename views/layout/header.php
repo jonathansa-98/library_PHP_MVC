@@ -22,6 +22,7 @@
                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                               <a class="dropdown-item" href="<?=BASE_URL?>category/manage" type="button">Manage categories</a>
+                              <a class="dropdown-item" href="<?=BASE_URL?>author/manage" type="button">Manage authors</a>
                               <a class="dropdown-item" href="<?=BASE_URL?>user/manage" type="button">Manage users</a>
                               <a class="dropdown-item" href="<?=BASE_URL?>book/manage" type="button">Manage books</a>
                             </div>

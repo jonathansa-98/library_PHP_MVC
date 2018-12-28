@@ -1,5 +1,4 @@
 <?php
-
 class Category {
     
     private $id;
@@ -41,7 +40,6 @@ class Category {
     public function checkName() {
         $sql = "SELECT * FROM category WHERE name = '{$this->name}'";
         $category = $this->db->query($sql);
-        
         if(!$this->name || $category->num_rows == 1 ) return false;
         return true;
     }
@@ -53,11 +51,7 @@ class Category {
             $sql = "INSERT INTO category VALUES(NULL,'{$this->getName()}');";
         }
         $save = $this->db->query($sql);
-        
-        if($save){
-            return true;
-        }
-        return false;
+        return $save ? true:false;
     }
     
     public function getOne() {

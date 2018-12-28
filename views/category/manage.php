@@ -18,7 +18,7 @@
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Edit</th>
-            <th scope="col">Erase</th>
+            <th scope="col">Delete</th>
         </tr>
     <?php while ($cat = $categories->fetch_object("Category")): ?>
         <tr>
