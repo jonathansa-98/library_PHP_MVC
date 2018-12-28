@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-12-2018 a las 13:37:15
+-- Tiempo de generación: 28-12-2018 a las 16:16:57
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -109,17 +109,18 @@ CREATE TABLE `borrow` (
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `category_name` varchar(25) NOT NULL
+  `name` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `category`
 --
 
-INSERT INTO `category` (`id`, `category_name`) VALUES
+INSERT INTO `category` (`id`, `name`) VALUES
 (1, 'fantasy'),
 (2, 'horror'),
-(3, 'love');
+(3, 'love'),
+(17, 'pepe');
 
 -- --------------------------------------------------------
 
@@ -236,7 +237,7 @@ ALTER TABLE `borrow`
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `reserve`

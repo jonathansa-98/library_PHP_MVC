@@ -13,11 +13,11 @@ CREATE TABLE `user` (
    CONSTRAINT PK_user PRIMARY KEY (login)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*INSERT INTO `user` (`login`, `pass`, `dni`, `email`, `role`) VALUES
-('biel', 'esselte14', '39581473k', 'daw2glopezmonjo@iesjoanramis.org', 'client'),
-('jonathan', 'esselte14', '34567281S', 'daw2jsuarezalvarez@iesjoanramis.org', 'librarian'),
-('marc', 'supersegura', '31231231G', 'asdasdasdasd@gmail.com', 'client'),
-('user1', 'supersegura', '37291847G', 'no_reply@gmail.com', 'client');*/
+INSERT INTO `user` (`login`, `pass`, `dni`, `email`, `role`) VALUES
+('angel', 0xd67241fa97a2bc93d92ec0167446b989, '12321312G', 'angel@angel.com', 'user'),
+('biel', 0xb4306cc31975394c76a033c97c595bf6, '12374591A', 'daw2glopezmonjo@iesjoanramis.org', 'user'),
+('jona', 0xe26a8bf6758b85b06f50af446734a749, '11122233K', 'daw2jsuarezalvarez@iesjoanramis.org', 'librarian'),
+('pepea', 0x559525453cd4bcdde670232210498c03, '21312312F', 'myself@domain.com', 'user');
 
 -- --------------------------------------------------------
 
@@ -36,13 +36,13 @@ INSERT INTO `author` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 CREATE TABLE `category` (
-  `id`              int auto_increment  NOT NULL,
-  `category_name`   varchar(25)         NOT NULL,
+  `id`     int auto_increment  NOT NULL,
+  `name`   varchar(25)         NOT NULL,
 
    CONSTRAINT PK_category PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `category` (`id`, `category_name`) VALUES
+INSERT INTO `category` (`id`, `name`) VALUES
 (1, 'fantasy'),
 (2, 'horror'),
 (3, 'love');

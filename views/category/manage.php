@@ -1,28 +1,31 @@
 <div class="center">
     <h1>Manage categories</h1>
-    <?php if(isset($_SESSION['newcategory'])): ?>
-        <?php if(substr($_SESSION['newcategory'], 0, 7) == 'Success'): ?>
+    <?php if(isset($_SESSION['state_cat'])): ?>
+        <?php if(substr($_SESSION['state_cat'], 0, 7) == 'Success'): ?>
         <div class="alert alert-success">
-            <?=$_SESSION['newcategory']?>
+            <?=$_SESSION['state_cat']?>
         </div>
         <?php else: ?>
         <div class="alert alert-danger">
-            <?=$_SESSION['newcategory']?>
+            <?=$_SESSION['state_cat']?>
         </div>
         <?php endif; 
-        Utils::deleteSession('newcategory'); ?>
+        Utils::deleteSession('state_cat'); ?>
     <?php endif; ?>
+    
     <table class="table table-hover">
         <tr class="thead-dark">
             <th scope="col">Id</th>
             <th scope="col">Name</th>
+            <th scope="col">Edit</th>
             <th scope="col">Erase</th>
         </tr>
-    <?php while ($cat = $categories->fetch_object()): ?>
+    <?php while ($cat = $categories->fetch_object("Category")): ?>
         <tr>
-            <th class="col-md-1" scope="row"><?=$cat->id;?></th>
-            <td class="col-md-4"><?=$cat->category_name;?></td>
-            <td class="col-md-1"><a href="<?=BASE_URL."category/delete?id='{$cat->id}'";?>"><i class="fas fa-trash-alt"></i></a></td>
+            <th class="col-md-1" scope="row"><?=$cat->getId();?></th>
+            <td class="col-md-5"><?=$cat->getName();?></td>
+            <td class="col-md-1"><a href="<?=BASE_URL."category/edit&id={$cat->getId()}";?>"><i class="fas fa-edit"></i></a></td>
+            <td class="col-md-1"><a href="<?=BASE_URL."category/delete&id={$cat->getId()}";?>"><i class="fas fa-trash-alt"></i></a></td>
         </tr>
     <?php endwhile; ?>
     </table>
