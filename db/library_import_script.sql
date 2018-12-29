@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-12-2018 a las 19:56:55
+-- Tiempo de generación: 29-12-2018 a las 19:10:01
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -21,9 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `library`
 --
-
-CREATE DATABASE library;
-USE library;
 
 -- --------------------------------------------------------
 
@@ -43,7 +40,8 @@ CREATE TABLE `author` (
 INSERT INTO `author` (`id`, `name`) VALUES
 (1, 'Cervantes'),
 (2, 'J.K.Rowling'),
-(3, 'Tolkien');
+(3, 'Tolkien'),
+(4, 'Brandon Sanderson');
 
 -- --------------------------------------------------------
 
@@ -52,7 +50,8 @@ INSERT INTO `author` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `book` (
-  `isbn` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `isbn` varchar(13) NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `category_id` int(11) DEFAULT NULL,
@@ -63,9 +62,10 @@ CREATE TABLE `book` (
 -- Volcado de datos para la tabla `book`
 --
 
-INSERT INTO `book` (`isbn`, `name`, `description`, `category_id`, `author_id`) VALUES
-(1823681231, 'The Lord Of the Rings', 'A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.', 1, 3),
-(2147483647, 'Harry Potter and the chamber of secrets', 'An ancient prophecy seems to be coming true when a mysterious presence begins stalking the corridors of a school of magic and leaving its victims paralyzed.', 1, 2);
+INSERT INTO `book` (`id`, `isbn`, `name`, `description`, `category_id`, `author_id`) VALUES
+(1, '1823681231123', 'The Lord Of the Rings', 'A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.', 1, 3),
+(2, '2147483647123', 'Harry Potter and the chamber of secrets', 'An ancient prophecy seems to be coming true when a mysterious presence begins stalking the corridors of a school of magic and leaving its victims paralyzed.', 1, 2),
+(3, '9783453317109', 'The Way of Kings', 'Roshar is a world of stone and storms. Uncanny tempests of incredible power sweep across the rocky terrain so frequently that they have shaped ecology and civilization alike. Animals hide in shells, trees pull in branches, and grass retracts into the soilless ground. Cities are built only where the topography offers shelter.', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -75,18 +75,18 @@ INSERT INTO `book` (`isbn`, `name`, `description`, `category_id`, `author_id`) V
 
 CREATE TABLE `book_copy` (
   `id` int(11) NOT NULL,
-  `book_isbn` int(11) NOT NULL
+  `book_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `book_copy`
 --
 
-INSERT INTO `book_copy` (`id`, `book_isbn`) VALUES
-(1, 1823681231),
-(2, 1823681231),
-(3, 1823681231),
-(4, 1823681231);
+INSERT INTO `book_copy` (`id`, `book_id`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1);
 
 -- --------------------------------------------------------
 
@@ -118,9 +118,9 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'fantasy'),
-(2, 'horror'),
-(3, 'love');
+(1, 'Fantasy'),
+(2, 'Horror'),
+(3, 'Love');
 
 -- --------------------------------------------------------
 
@@ -131,7 +131,7 @@ INSERT INTO `category` (`id`, `name`) VALUES
 CREATE TABLE `reserve` (
   `id` int(11) NOT NULL,
   `user_login` varchar(20) NOT NULL,
-  `book_isbn` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
   `reservation_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -173,7 +173,7 @@ ALTER TABLE `author`
 -- Indices de la tabla `book`
 --
 ALTER TABLE `book`
-  ADD PRIMARY KEY (`isbn`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `FK_category_book` (`category_id`),
   ADD KEY `FK_author_book` (`author_id`);
 
@@ -182,7 +182,7 @@ ALTER TABLE `book`
 --
 ALTER TABLE `book_copy`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_book_copy_isbn` (`book_isbn`);
+  ADD KEY `FK_book_copy_id` (`book_id`);
 
 --
 -- Indices de la tabla `borrow`
@@ -203,7 +203,7 @@ ALTER TABLE `category`
 --
 ALTER TABLE `reserve`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_reserve_isbn` (`book_isbn`),
+  ADD KEY `FK_reserve_id` (`book_id`),
   ADD KEY `FK_reserve_login` (`user_login`);
 
 --
@@ -220,6 +220,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `author`
 --
 ALTER TABLE `author`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `book`
+--
+ALTER TABLE `book`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -261,7 +267,7 @@ ALTER TABLE `book`
 -- Filtros para la tabla `book_copy`
 --
 ALTER TABLE `book_copy`
-  ADD CONSTRAINT `FK_book_copy_isbn` FOREIGN KEY (`book_isbn`) REFERENCES `book` (`isbn`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_book_copy_id` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `borrow`
@@ -274,7 +280,7 @@ ALTER TABLE `borrow`
 -- Filtros para la tabla `reserve`
 --
 ALTER TABLE `reserve`
-  ADD CONSTRAINT `FK_reserve_isbn` FOREIGN KEY (`book_isbn`) REFERENCES `book` (`isbn`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_reserve_id` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_reserve_login` FOREIGN KEY (`user_login`) REFERENCES `user` (`login`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

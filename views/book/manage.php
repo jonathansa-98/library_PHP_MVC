@@ -15,6 +15,7 @@
     
     <table class="table table-hover table_book">
         <tr class="thead-dark">
+            <th scope="col">Id</th>
             <th scope="col">Isbn</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
@@ -25,13 +26,14 @@
         </tr>
     <?php while ($book = $books->fetch_object("Book")): ?>
         <tr>
-            <th class="col-md-1"><?=$book->getIsbn();?></th>
+            <th class="col-md-1"><?=$book->getId();?></th>
+            <td class="col-md-1"><?=$book->getIsbn();?></td>
             <td class="col-md-3"><?=$book->getName();?></td>
-            <td class="col-md-7"><?=$book->getDescription();?></td>
-            <td class="col-md-1"><?=$book->getCategory_id();?></td>
-            <td class="col-md-1"><?=$book->getAuthor_id();?></td>
-            <td class="col-md-1"><a href="#"><i class="fas fa-edit"></i></a></td>
-            <td class="col-md-1"><a href="#"><i class="fas fa-trash-alt"></i></a></td>
+            <td class="col-md-6"><?=$book->getDescription();?></td>
+            <td class="col-md-1"><?=Utils::getCategoryById($book->getCategoryId())->getName();?></td>
+            <td class="col-md-1"><?=Utils::getAuthorById($book->getAuthorId())->getName();?></td>
+            <td class="col-md-1"><a href="<?=BASE_URL."book/edit&id={$book->getId()}";?>"><i class="fas fa-edit"></i></a></td>
+            <td class="col-md-1"><a href="<?=BASE_URL."book/delete&id={$book->getId()}";?>"><i class="fas fa-trash-alt"></i></a></td>
         </tr>
     <?php endwhile; ?>
     </table>

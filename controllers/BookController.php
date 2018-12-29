@@ -20,90 +20,98 @@ class BookController{
         require_once 'views/book/create.php';
     }
     
-    /*public function edit() {
+    public function edit() {
         Utils::restrictNotLoged();
         Utils::restrictNormalUser();
-        // Retrieving the author from the DB
+        // Retrieving the book from the DB
         if(isset($_GET['id'])){
             $edit = true;
-            $author = new Author();
-            $author->setId($_GET['id']);
+            $books = new Book();
+            $books->setId($_GET['id']);
             
-            $aut = $author->getOne();
-            require_once 'views/author/create.php';
+            $book = $books->getOne();
+            require_once 'views/book/create.php';
         } else {
-            header('Location:'.BASE_URL.'author/manage');
+            header('Location:'.BASE_URL.'book/manage');
         }
     }
     
     public function saveEdit() {
         Utils::restrictNotLoged();
         Utils::restrictNormalUser();
-        $success_msg = "Success updating author.";
-        $error_msg = "Update error, please write a valid name.";
+        $success_msg = "Success updating book.";
+        $error_msg = "Update error, please check the fields.";
         
-        // Save author in db
-        if(isset($_POST['name'])){
-            $aut = new Author();
-            $aut->setId($_GET['id']);
-            $aut->setName($_POST['name']);
+        // Save book in db
+        if(isset($_POST)){
+            $book = new Book();
+            $book->setId($_GET['id']);
+            $book->setIsbn($_POST['isbn']);
+            $book->setName($_POST['name']);
+            $book->setDescription($_POST['description']);
+            $book->setCategoryId($_POST['category']);
+            $book->setAuthorId($_POST['author']);
             
             // Search for errors
-            if($aut->checkName()){
+            if($book->checkData()){
                 // Saves the author in the DB
                 $edit = true;
-                $save = $aut->save($edit);
-                $_SESSION['state_aut'] = $save ? $success_msg:$error_msg;
+                $save = $book->save($edit);
+                $_SESSION['state_book'] = $save ? $success_msg:$error_msg;
             }else{
-                $_SESSION['state_aut'] = $error_msg;
+                $_SESSION['state_book'] = $error_msg;
             }  
         }else{
-            $_SESSION['state_aut'] = $error_msg;
+            $_SESSION['state_book'] = $error_msg;
         }
-        header("Location:".BASE_URL."author/manage");
+        header("Location:".BASE_URL."book/manage");
     }
-    
+
     public function save() {
         Utils::restrictNotLoged();
         Utils::restrictNormalUser();
-        $success_msg = "Success creating author.";
-        $error_msg = "Creation error, please write a valid name.";
+        $success_msg = "Success creating book.";
+        $error_msg = "Creation error, please check the fields.";
         
-        // Save author in db
-        if(isset($_POST['name'])){
-            $author = new Author();
-            $author->setName($_POST['name']);
+        // Save book in db
+        if(isset($_POST)){
+            $book = new Book();
+            $book->setIsbn($_POST['isbn']);
+            $book->setName($_POST['name']);
+            $book->setDescription($_POST['description']);
+            $book->setCategoryId($_POST['category']);
+            $book->setAuthorId($_POST['author']);
             
             // Search for errors
-            if($author->checkName()){
+            if($book->checkData()){
                 // Saves the author in the DB
-                $save = $author->save(false);
-                $_SESSION['state_aut'] = $save ? $success_msg:$error_msg;
+                $save = $book->save(false);
+                $_SESSION['state_book'] = $save ? $success_msg:$error_msg;
             }else{
-                $_SESSION['state_aut'] = $error_msg;
+                $_SESSION['state_book'] = $error_msg;
             }  
         }else{
-            $_SESSION['state_aut'] = $error_msg;
+            $_SESSION['state_book'] = $error_msg;
         }
-        header("Location:".BASE_URL."author/manage");
+        header("Location:".BASE_URL."book/manage");
     }
     
     public function delete() {
         Utils::restrictNotLoged();
         Utils::restrictNormalUser();
-        $success_msg = "Success deleting author.";
+        $success_msg = "Success deleting book.";
         $error_msg = "Delete error.";
 
         if(isset($_GET['id'])){
-            $author = new Author();
-            $author->setId($_GET['id']);
+            $book = new Book();
+            $book->setId($_GET['id']);
              
-            // Deletes the author from the DB
-            $delete = $author->delete();
-            $_SESSION['state_aut'] = $delete ? $success_msg:$error_msg;    
+            // Deletes the book from the DB
+            $delete = $book->delete();
+            $_SESSION['state_book'] = $delete ? $success_msg:$error_msg;    
         } else {
-            $_SESSION['state_aut'] = $error_msg;
+            $_SESSION['state_book'] = $error_msg;
         }
-        header("Location:".BASE_URL."author/manage");
-    }*/
+        header("Location:".BASE_URL."book/manage");
+    }
 }

@@ -46,9 +46,30 @@ class Utils{
     }
     
     static function showCategories() {
-        require_once 'models/category.php';
+        require_once 'models/Category.php';
         $category = new Category();
         $categories = $category->getAll();
         return $categories;
+    }
+    
+    static function showAuthors() {
+        require_once 'models/Author.php';
+        $author = new Author();
+        $authors= $author->getAll();
+        return $authors;
+    }
+    
+    static function getCategoryById($id) {
+        require_once 'models/Category.php';
+        $category = new Category();
+        $category->setId($id);
+        return $category->getOne();
+    }
+    
+    static function getAuthorById($id) {
+        require_once 'models/Author.php';
+        $author = new Author();
+        $author->setId($id);
+        return $author->getOne();
     }
 }

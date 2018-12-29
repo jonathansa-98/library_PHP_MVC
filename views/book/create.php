@@ -1,7 +1,7 @@
 <div class="center">
     <?php if(isset($edit) && isset($book) && is_a($book, "Book")):?>
         <h1>Edit book <?=$book->getName();?></h1>
-        <?php $url_action = BASE_URL."book/saveEdit&isbn=".$book->getIsbn(); ?>
+        <?php $url_action = BASE_URL."book/saveEdit&id=".$book->getId(); ?>
     <?php else: ?>
         <h1>Create book</h1>
         <?php $url_action = BASE_URL."book/save" ?>
@@ -9,7 +9,7 @@
     <form action="<?=$url_action?>" method="POST">
         <div class="form-group">
             <label for="isbn">Isbn</label>
-            <input class="form-control" type="text" name="isbn" required minlength="13" maxlength="13"
+            <input class="form-control" type="text" name="isbn" required minlength="10" maxlength="13"
                    value="<?=isset($book) && is_a($book, "Book") ? $book->getIsbn():'';?>"/>
         </div>
         <div class="form-group">
@@ -19,16 +19,27 @@
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" rows="5" name="description" required="" minlength="25" maxlength="1000"
-                   value="<?=isset($book) && is_a($book, "Book") ? $book->getDescription():'';?>"></textarea>
+            <textarea class="form-control" rows="5" name="description" required minlength="25" maxlength="1000"
+                   ><?=isset($book) && is_a($book, "Book") ? $book->getDescription():'';?></textarea>
         </div>
         <div class="form-group">
             <label for="category">Category</label>
             <?php $categories = Utils::showCategories()?>
             <select class="form-control" name="category">
                 <?php while ($cat = $categories->fetch_object("Category")): ?>
-                <option value="<?=$cat->getId()?>">
+                <option value="<?=$cat->getId()?>" <?=isset($book) && is_a($book, "Book") && ($cat->getId()==$book->getCategoryId()) ? 'selected':'';?>>
                     <?=$cat->getName()?>
+                </option>
+                <?php endwhile; ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <?php $authors = Utils::showAuthors()?>
+            <select class="form-control" name="author">
+                <?php while ($author = $authors->fetch_object("Author")): ?>
+                <option value="<?=$author->getId()?>" <?=isset($book) && is_a($book, "Book") && ($author->getId()==$book->getAuthorId()) ? 'selected':'';?>>
+                    <?=$author->getName()?>
                 </option>
                 <?php endwhile; ?>
             </select>
