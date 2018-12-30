@@ -12,7 +12,7 @@
         <?php endif; 
         Utils::deleteSession('state_cat'); ?>
     <?php endif; ?>
-    
+    <a href="<?=BASE_URL?>category/create" class="btn btn-primary mt-3">+ New category</a>
     <table class="table table-hover">
         <tr class="thead-dark">
             <th scope="col">Id</th>
@@ -29,5 +29,4 @@
         </tr>
     <?php endwhile; ?>
     </table>
-    <a href="<?=BASE_URL?>category/create" class="btn btn-primary">+ New category</a>
 </div>

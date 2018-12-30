@@ -12,7 +12,7 @@
         <?php endif; 
         Utils::deleteSession('state_book'); ?>
     <?php endif; ?>
-    
+    <a href="<?=BASE_URL?>book/create" class="btn btn-primary mt-3">+ New book</a>
     <table class="table table-hover table_book">
         <tr class="thead-dark">
             <th scope="col">Id</th>
@@ -31,11 +31,10 @@
             <td class="col-md-3"><?=$book->getName();?></td>
             <td class="col-md-1"><?=Utils::getCategoryById($book->getCategoryId())->getName();?></td>
             <td class="col-md-1"><?=Utils::getAuthorById($book->getAuthorId())->getName();?></td>
-            <td class="col-md-1"><a href="<?=BASE_URL."copy/manage&book_id={$book->getId()}";?>"><i class="fas fa-copy"></i></a></td>
+            <td class="col-md-1"><a href="<?=BASE_URL."copy/manage&book_id={$book->getId()}";?>"><i class="fas fa-book"></i></a></td>
             <td class="col-md-1"><a href="<?=BASE_URL."book/edit&id={$book->getId()}";?>"><i class="fas fa-edit"></i></a></td>
             <td class="col-md-1"><a href="<?=BASE_URL."book/delete&id={$book->getId()}";?>"><i class="fas fa-trash-alt"></i></a></td>
         </tr>
     <?php endwhile; ?>
     </table>
-    <a href="<?=BASE_URL?>book/create" class="btn btn-primary">+ New book</a>
 </div>
