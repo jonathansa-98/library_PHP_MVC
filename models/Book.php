@@ -75,6 +75,23 @@ class Book {
         return $books;
     }
     
+    function checkIfBookIdExists(){
+        $sql = "SELECT * FROM book WHERE id={$this->id}";
+        $result = $this->db->query($sql);
+        if (is_object($result)){
+            if($result->num_rows == 1 ){
+                $book = $result->fetch_object();
+                $this->setId($book->id);
+                $this->setName($book->name);
+                return true;
+            }else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
     public function checkIsbn() {
         $sql = "SELECT * FROM book WHERE isbn = '{$this->isbn}'";
         $book = $this->db->query($sql);

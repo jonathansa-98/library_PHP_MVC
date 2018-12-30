@@ -2,13 +2,13 @@
     <h1>Manage books</h1>
     <?php if(isset($_SESSION['state_book'])): ?>
         <?php if(substr($_SESSION['state_book'], 0, 7) == 'Success'): ?>
-        <div class="alert alert-success">
-            <?=$_SESSION['state_book']?>
-        </div>
+            <div class="alert alert-success">
+                <?=$_SESSION['state_book']?>
+            </div>
         <?php else: ?>
-        <div class="alert alert-danger">
-            <?=$_SESSION['state_book']?>
-        </div>
+            <div class="alert alert-danger">
+                <?=$_SESSION['state_book']?>
+            </div>
         <?php endif; 
         Utils::deleteSession('state_book'); ?>
     <?php endif; ?>
@@ -18,9 +18,9 @@
             <th scope="col">Id</th>
             <th scope="col">Isbn</th>
             <th scope="col">Name</th>
-            <th scope="col">Description</th>
             <th scope="col">Category</th>
             <th scope="col">Author</th>
+            <th scope="col">See copies</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
@@ -29,9 +29,9 @@
             <th class="col-md-1"><?=$book->getId();?></th>
             <td class="col-md-1"><?=$book->getIsbn();?></td>
             <td class="col-md-3"><?=$book->getName();?></td>
-            <td class="col-md-6"><?=$book->getDescription();?></td>
             <td class="col-md-1"><?=Utils::getCategoryById($book->getCategoryId())->getName();?></td>
             <td class="col-md-1"><?=Utils::getAuthorById($book->getAuthorId())->getName();?></td>
+            <td class="col-md-1"><a href="<?=BASE_URL."copy/manage&book_id={$book->getId()}";?>"><i class="fas fa-copy"></i></a></td>
             <td class="col-md-1"><a href="<?=BASE_URL."book/edit&id={$book->getId()}";?>"><i class="fas fa-edit"></i></a></td>
             <td class="col-md-1"><a href="<?=BASE_URL."book/delete&id={$book->getId()}";?>"><i class="fas fa-trash-alt"></i></a></td>
         </tr>

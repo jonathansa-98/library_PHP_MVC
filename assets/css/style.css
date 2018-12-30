@@ -104,6 +104,14 @@ form{
     width: 75% !important;
 }
 
+.table th{
+    text-align: center;
+}
+
+.table .col-md-1{
+    text-align: center;
+}
+
 .table_book{
     width: 90% !important;
 }
