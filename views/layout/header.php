@@ -31,6 +31,12 @@
                             </div>
                         </div>
                     <?php endif; ?>
+                    <div class="search_bar ml-4 mr-4">
+                        <form class="form-inline">
+                            <input class="form-control mr-1" type="text" placeholder="Search books">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </form>
+                    </div>
                     <div class="login">
                     <?php if(!isset($_SESSION['userIdentity'])): ?>
                         <li class="nav-item"><a href="<?=BASE_URL?>user/login" class="btn btn-success" role="button" aria-pressed="true">Login</a></li>
