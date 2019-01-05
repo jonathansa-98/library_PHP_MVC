@@ -84,7 +84,28 @@ body{
     padding: 0;
     margin: 0;
     padding-bottom: 30px;
-    background-color: whitesmoke;
+    /*background-color: whitesmoke;*/
+}
+
+#books_initial{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0;
+}
+
+#books_initial .card {
+    margin: 20px;
+    width: 28%;
+    display: flex; 
+    flex-direction: column;
+}
+
+#books_initial img{
+    height: 300px; 
+    width: 200px;
+    display: flex;
+    align-self: center;
 }
 
 #main-container h1{

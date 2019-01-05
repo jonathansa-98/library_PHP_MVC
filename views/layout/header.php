@@ -3,7 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Library</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <!-- Bootswatch styles: 
+        default cerulean cosmo cyborg darkly flatly journal litera lumen lux materia 
+        minty pulse sandstone simplex sketchy slate solar spacelab superhero united yeti-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/flatly/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
         <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>assets/css/style.css">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

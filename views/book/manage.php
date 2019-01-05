@@ -2,13 +2,15 @@
     <h1>Manage books</h1>
     <?php if(isset($_SESSION['state_book'])): ?>
         <?php if(substr($_SESSION['state_book'], 0, 7) == 'Success'): ?>
-            <div class="alert alert-success">
-                <?=$_SESSION['state_book']?>
-            </div>
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?=$_SESSION['state_book']?>
+        </div>
         <?php else: ?>
-            <div class="alert alert-danger">
-                <?=$_SESSION['state_book']?>
-            </div>
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?=$_SESSION['state_book']?>
+        </div>
         <?php endif; 
         Utils::deleteSession('state_book'); ?>
     <?php endif; ?>
