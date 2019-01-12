@@ -2,7 +2,8 @@
     <h1>Login</h1>
     <?php if(isset($_SESSION['login'])): ?>
         <?php if(substr($_SESSION['login'], 0, 5) == 'Error'): ?>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?=$_SESSION['login']?>
         </div>
         <?php endif; ?>

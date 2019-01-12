@@ -14,7 +14,7 @@
         <?php endif; 
         Utils::deleteSession('status_copy');?>
     <?php endif; ?>
-    <a href="<?=BASE_URL?>copy/create&book_id=<?=$book->getId()?>" class="btn btn-primary mt-3">+ New Copy</a>
+    <a href="<?=BASE_URL?>copy/create&book_id=<?=$book->getId()?>" class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Add Copy</a>
     <table class="table table-hover">
         <tr class="thead-dark">
             <th scope="col">Copy Id</th>

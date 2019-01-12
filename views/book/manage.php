@@ -14,7 +14,7 @@
         <?php endif; 
         Utils::deleteSession('state_book'); ?>
     <?php endif; ?>
-    <a href="<?=BASE_URL?>book/create" class="btn btn-primary mt-3">+ New book</a>
+    <a href="<?=BASE_URL?>book/create" class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Add book</a>
     <table class="table table-hover table_book">
         <tr class="thead-dark">
             <th scope="col">Id</th>

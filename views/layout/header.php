@@ -19,7 +19,7 @@
             <nav>
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a href="<?=BASE_URL?>book/seeAll" class="btn btn-primary" role="button" aria-pressed="true">Books</a></li>
-                    <li class="nav-item"><a href="<?=BASE_URL?>user/profile" class="btn btn-primary" role="button" aria-pressed="true">Profile</a></li>
+                    <li class="nav-item"><a href="<?=BASE_URL?>user/edit" class="btn btn-primary" role="button" aria-pressed="true">Profile</a></li>
                     <?php if(isset($_SESSION['librarian'])): ?>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</button>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="login">
                     <?php if(!isset($_SESSION['userIdentity'])): ?>
-                        <li class="nav-item"><a href="<?=BASE_URL?>user/login" class="btn btn-success" role="button" aria-pressed="true">Login</a></li>
+                        <li class="nav-item"><a href="<?=BASE_URL?>user/login" class="btn btn-success mb-1" role="button" aria-pressed="true">Login</a></li>
                         <li class="nav-item"><a href="<?=BASE_URL?>user/register" class="btn btn-success" role="button" aria-pressed="true">Register</a></li>
                     <?php else: ?>
                         <p><?=$_SESSION['userIdentity']->getLogin();?></p>

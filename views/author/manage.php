@@ -14,7 +14,7 @@
         <?php endif; 
         Utils::deleteSession('state_aut'); ?>
     <?php endif; ?>
-    <a href="<?=BASE_URL?>author/create" class="btn btn-primary mt-3">+ New author</a>
+    <a href="<?=BASE_URL?>author/create" class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Add author</a>
     <table class="table table-hover">
         <tr class="thead-dark">
             <th scope="col">Id</th>

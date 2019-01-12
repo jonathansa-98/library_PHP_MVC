@@ -56,6 +56,10 @@ class User {
     
     function checkLogin() {
         $sql = "SELECT * FROM user WHERE login = '{$this->login}'";
+        // Check from other users when updating profile
+        if($this->getPass() == NULL){
+            $sql .= " AND login != '{$this->getLogin()}'";
+        }
         $login = $this->db->query($sql);
         
         if(!$this->login || $login->num_rows == 1 ) return false;
@@ -64,6 +68,10 @@ class User {
     
     function checkDni() {
         $sql = "SELECT * FROM user WHERE dni = '{$this->dni}'";
+        // Check from other users when updating profile
+        if($this->getPass() == NULL){
+            $sql .= " AND login != '{$this->getLogin()}'";
+        }
         $login = $this->db->query($sql);
         
         if(!$this->dni || $login->num_rows == 1)return false;
@@ -74,6 +82,10 @@ class User {
     
     function checkEmail() {
         $sql = "SELECT * FROM user WHERE email = '{$this->email}'";
+        // Check from other users when updating profile
+        if($this->getPass() == NULL){
+            $sql .= " AND login != '{$this->getLogin()}'";
+        }
         $login = $this->db->query($sql);
         
         if(!$this->email || $login->num_rows == 1)return false;
@@ -92,9 +104,12 @@ class User {
     }
     
     function saveRegister() {
-        $sql = "INSERT INTO user VALUES('{$this->getLogin()}', AES_ENCRYPT('{$this->getPass()}', 'esselte14'), '{$this->getDni()}','{$this->getEmail()}','{$this->getRole()}');";
+        if ($this->pass == NULL) {
+            $sql = "UPDATE user SET dni='{$this->getDni()}', email='{$this->getEmail()}' WHERE login='{$this->getLogin()}';";
+        } else {
+            $sql = "INSERT INTO user VALUES('{$this->getLogin()}', AES_ENCRYPT('{$this->getPass()}', 'esselte14'), '{$this->getDni()}','{$this->getEmail()}','{$this->getRole()}');";
+        }
         $save = $this->db->query($sql);
-        
         if($save){
             return true;
         }
@@ -120,4 +135,25 @@ class User {
         return $result;
     }
     
+    function getAll(){
+        $sql = "select * from user where role = 'user' order by login";
+        return $this->db->query($sql);
+    }
+    
+    public function delete(){
+        $sql = "delete from user where login='{$this->getLogin()}';";
+        $this->db->query($sql);
+    }
+    
+    function checkIfUserExistsByLogin(){
+        $SQLQuery = "select * from user where login='{$this->getLogin()}'";
+        $user = $this->db->query($SQLQuery);
+        return $user->num_rows == 1 ? true:false;
+    }
+    
+    public function getOne(){
+        $sql = "select * from user where login='{$this->getLogin()}';";
+        $user = $this->db->query($sql);
+        return $user->fetch_object('User');
+    }
 }

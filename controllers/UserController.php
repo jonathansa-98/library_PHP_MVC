@@ -82,4 +82,81 @@ class UserController{
         
         header("Location:".BASE_URL);
     }
+    
+    public function manage(){
+        Utils::restrictNotLoged();
+        Utils::restrictNormalUser();
+        $user = new User();
+        $users = $user->getAll();
+        require_once 'views/user/manage.php';
+    }
+    
+    public function delete(){
+        Utils::restrictNotLoged();
+        Utils::restrictNormalUser();
+        $success_msg = "Success deleting user.";
+        $error_msg = "Delete error, user selected not found.";
+        
+        if(isset($_GET)){
+            $user = new User();
+            $user->setLogin($_GET['login']);
+            if($user->checkIfUserExistsByLogin()){
+                $user->delete();
+                $_SESSION['state_user'] = $success_msg;
+            }else{
+                $_SESSION['state_user'] = $error_msg;
+            }
+            header('Location:'.BASE_URL.'user/manage');
+        }else{
+            header('Location:'.BASE_URL);
+        }
+    }
+    
+    public function edit(){
+        if(isset($_SESSION['userIdentity'])){ // Check if the user has logged
+            if(isset($_GET['login'])){ // Not own profile
+                Utils::restrictNotLoged();
+                Utils::restrictNormalUser();
+                $user = new User();
+                $user->setLogin($_GET['login']);
+                $user = $user->getOne();
+            }else{ // Own user profile
+                $user = new User();
+                $user->setLogin($_SESSION['userIdentity']->getLogin());
+                $user = $user->getOne();
+            }
+            require_once 'views/user/profile.php';
+        }else{
+            header('Location:'.BASE_URL);
+        }
+    }
+    
+    public function saveUpdate(){
+        if(isset($_POST)){
+            $success_msg = "Success updating user.";
+            $error_msg = "Update error, check the fields and try again.";
+        
+            $user = new User();
+            if(isset($_GET['login'])){
+                $user->setLogin($_GET['login']);
+            }
+            $user->setDni($_POST['dni']);
+            $user->setEmail($_POST['email']);
+            
+            $errors = $user->checkData();
+            if($errors == 0){
+                $save = $user->saveRegister();
+                $_SESSION['state_user'] = $save ? $success_msg:$error_msg;
+            }else{
+                $_SESSION['state_user'] = $error_msg;
+            }
+            if(isset($_GET['login'])){
+                header('Location:'.BASE_URL.'user/edit&login='.$user->getLogin());
+            }else{
+                header('Location:'.BASE_URL.'user/edit');
+            }
+        }else{
+            header('Location:'.BASE_URL);
+        }
+    }
 }

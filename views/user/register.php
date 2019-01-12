@@ -3,11 +3,13 @@
     
     <?php if(isset($_SESSION['register'])): ?>
         <?php if(substr($_SESSION['register'], 0, 7) == 'Success'): ?>
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?=$_SESSION['register']?>
         </div>
         <?php else: ?>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?=$_SESSION['register']?>
         </div>
         <?php endif; 
