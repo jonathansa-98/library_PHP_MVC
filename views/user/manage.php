@@ -20,8 +20,8 @@
             <th scope="col">Login</th>
             <th scope="col">DNI</th>
             <th scope="col">Email</th>
-            <th scope="col">Edit</th>
             <th scope="col">Reserves/Borrows</th>
+            <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
     <?php while($user = $users->fetch_object("User")): ?>
@@ -29,8 +29,8 @@
             <td class="col-md-2"><?=$user->getLogin()?></td>
             <td class="col-md-1"><?=$user->getDni()?></td>
             <td class="col-md-3"><?=$user->getEmail()?></td>
-            <td class="col-md-1"><a href="<?=BASE_URL?>user/edit&login=<?=$user->getLogin()?>"><i class="fas fa-pencil-alt"></i></a></td>
             <td class="col-md-1"><a href="<?=BASE_URL?>user/reservationBorrow&login=<?=$user->getLogin()?>"><i class="fas fa-paper-plane"></i></a></td>
+            <td class="col-md-1"><a href="<?=BASE_URL?>user/edit&login=<?=$user->getLogin()?>"><i class="fas fa-edit"></i></a></td>
             <td class="col-md-1"><a href="<?=BASE_URL?>user/delete&login=<?=$user->getLogin()?>"><i class="fas fa-times"></i></a></td>
         </tr>
     <?php endwhile; ?>
