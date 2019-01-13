@@ -8,6 +8,7 @@ class Book {
     private $description;
     private $category_id;
     private $author_id;
+    private $image;
     private $db;
     
     function __construct() {
@@ -37,7 +38,7 @@ class Book {
     function getAuthorId() {
         return $this->author_id;
     }
-
+    
     function getDb() {
         return $this->db;
     }
@@ -65,7 +66,7 @@ class Book {
     function setAuthorId($author_id) {
         $this->author_id = $author_id;
     }
-
+    
     function setDb($db) {
         $this->db = $db;
     }
@@ -94,6 +95,8 @@ class Book {
     
     public function checkIsbn() {
         $sql = "SELECT * FROM book WHERE isbn = '{$this->isbn}'";
+        // Check other books when updating.
+        if($this->id != NULL) $sql .= " and id!={$this->id}";
         $book = $this->db->query($sql);
         
         if(!$this->isbn || $book->num_rows == 1 ) return false;
@@ -107,17 +110,19 @@ class Book {
     
     public function checkName() {
         $sql = "SELECT * FROM book WHERE name = '{$this->name}'";
+        // Check other books when updating.
+        if($this->id != NULL) $sql .= " and id!={$this->id}";
         $book = $this->db->query($sql);
-        
+
         if(!$this->name || $book->num_rows == 1 ) return false;
         return true;
     }
     
     public function checkData() {
         $errors = 0;
-        if($this->checkIsbn()) $errors++;
-        if($this->checkName()) $errors++;
-        return $errors;
+        if(!$this->checkIsbn()) $errors++;
+        if(!$this->checkName()) $errors++;
+        return $errors == 0;
     }
     
     public function save($edit) {

@@ -1,12 +1,14 @@
 <div class="center">
+    
     <?php if(isset($edit) && isset($book) && is_a($book, "Book")):?>
         <h1>Edit book <?=$book->getName();?></h1>
-        <?php $url_action = BASE_URL."book/saveEdit&id=".$book->getId(); ?>
+        <?php $url_action = BASE_URL."book/save&id=".$book->getId(); ?>
     <?php else: ?>
         <h1>Create book</h1>
         <?php $url_action = BASE_URL."book/save" ?>
     <?php endif; ?>
-    <form action="<?=$url_action?>" method="POST">
+    
+    <form action="<?=$url_action?>" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="isbn">Isbn</label>
             <input class="form-control" type="text" name="isbn" required minlength="10" maxlength="13"
@@ -43,6 +45,16 @@
                 </option>
                 <?php endwhile; ?>
             </select>
+        </div>
+        <div class="form-group">
+            <?php if(isset($edit) && isset($book) && is_a($book, "Book")):?>
+                <img src="<?=BASE_URL?>assets/img/book_covers/<?=$book->getIsbn()?>.png" width="130" height="200"><br>
+                <label for="image">Image (only .png) <?="{$book->getIsbn()}.png"?></label><br>
+                <input type="file" name="image" value="<?="{$book->getIsbn()}.png"?>" accept="image/png"/>
+            <?php else: ?>
+                <label for="image">Image (only .png)</label><br>
+                <input type="file" name="image" required="" accept="image/png"/>
+            <?php endif; ?>
         </div>
         <input class="btn btn-primary mb-3" type="submit" value="Save"/>
     </form>

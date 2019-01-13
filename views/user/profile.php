@@ -1,6 +1,7 @@
 <div class="center">
     <h1>Profile of <?= $user->getLogin()?></h1>
-    <?php if(isset($_SESSION['state_user'])): ?>
+    
+        <?php if(isset($_SESSION['state_user'])): ?>
         <?php if(substr($_SESSION['state_user'], 0, 7) == 'Success'): ?>
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -14,6 +15,7 @@
         <?php endif; 
         Utils::deleteSession('state_user'); ?>
     <?php endif; ?>
+    
     <form class="form-group" action="<?=BASE_URL?>user/saveUpdate&login=<?=$user->getLogin()?>" method="POST">
         <div class="form-group">
             <label for="login">Login<i class="text-danger">*</i></label>
