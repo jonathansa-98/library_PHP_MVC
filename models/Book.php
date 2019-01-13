@@ -72,8 +72,21 @@ class Book {
     }
 
     public function getAll() {
-        $books = $this->db->query("SELECT * FROM book ORDER BY id DESC;");
+        $sql = "SELECT * FROM book ORDER BY id DESC;";
+        $books = $this->db->query($sql);
         return $books;
+    }
+    
+    public function getRandom($limit) {
+        $sql = "SELECT * FROM book ORDER BY RAND() LIMIT {$limit};";
+        $books = $this->db->query($sql);
+        return $books;
+    } 
+    
+    public function getOne() {
+        $sql = "SELECT * FROM book WHERE id={$this->getId()};";
+        $book = $this->db->query($sql);
+        return $book->fetch_object("Book");
     }
     
     function checkIfBookIdExists(){
@@ -135,12 +148,6 @@ class Book {
         return $save ? true:false;
     }
 
-    public function getOne() {
-        $sql = "SELECT * FROM book WHERE id={$this->getId()};";
-        $book = $this->db->query($sql);
-        return $book->fetch_object("Book");
-    }
-    
     public function delete() {
         $sql = "DELETE FROM book WHERE id={$this->id}";
         $delete = $this->db->query($sql);

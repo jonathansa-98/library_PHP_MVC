@@ -72,4 +72,11 @@ class Utils{
         $author->setId($id);
         return $author->getOne();
     }
+    
+    // Takes 'n' number of words out of a text, if the text has more
+    // words than 'n' it returns a resumed text with '...'.
+    static function resumeText($text, $limit) {
+        preg_match('/^([^.!?\s]*[\.!?\s]+){0,'.$limit.'}/', strip_tags($text), $container);
+        return strlen($container[0]) < strlen($text) ? $container[0]." ...":$text;
+    }
 }

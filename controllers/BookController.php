@@ -3,6 +3,8 @@ require_once 'models/Book.php';
 class BookController{
     
     public function index() {
+       $book = new Book();
+       $books = $book->getRandom(6);
        require_once 'views/book/initial.php';
    }
 
@@ -68,11 +70,6 @@ class BookController{
                    mkdir('assets/img/book_covers',0777, true);
                }
             }
-            /*
-            echo '<pre>';
-                print_r($book);
-            echo '</pre>';
-            */
             // Search for errors
             if($book->checkData()){
                 // Saves the author in the DB
