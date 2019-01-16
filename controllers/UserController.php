@@ -114,7 +114,7 @@ class UserController{
     
     public function edit(){
         if(isset($_SESSION['userIdentity'])){ // Check if the user has logged
-            if(isset($_GET['login'])){ // Not own profile
+            if(isset($_GET['login']) && $_GET['login'] !== $_SESSION['userIdentity']->getLogin()){ // Not own profile
                 Utils::restrictNotLoged();
                 Utils::restrictNormalUser();
                 $user = new User();
