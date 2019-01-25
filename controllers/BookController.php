@@ -106,4 +106,10 @@ class BookController{
         }
         header("Location:".BASE_URL."book/manage");
     }
+    
+    public function seeAll() {
+        $book = new Book();
+        $books = $book->getAll();
+        require_once 'views/book/books.php'; 
+    }
 }
