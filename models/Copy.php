@@ -46,4 +46,11 @@ class Copy{
         $sql = "INSERT INTO book_copy VALUES(null, {$this->book_id});";
         return $this->db->query($sql);  
     }
+    
+    function getNCopiesByBookId($id) {
+        $sql = "select count(*) as total from book_copy where book_id={$this->book_id};";
+        $result = $this->db->query($sql);
+        $count = $result->fetch_assoc();
+        return $count['total'];
+    }
 }

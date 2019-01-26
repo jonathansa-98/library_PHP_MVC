@@ -29,7 +29,7 @@
             <td class="col-md-2"><?=$user->getLogin()?></td>
             <td class="col-md-1"><?=$user->getDni()?></td>
             <td class="col-md-3"><?=$user->getEmail()?></td>
-            <td class="col-md-1"><a href="<?=BASE_URL?>user/reservationBorrow&login=<?=$user->getLogin()?>"><i class="fas fa-paper-plane"></i></a></td>
+            <td class="col-md-1"><a href="<?=BASE_URL?>user/reserves&login=<?=$user->getLogin()?>"><i class="fas fa-paper-plane"></i></a></td>
             <td class="col-md-1"><a href="<?=BASE_URL?>user/edit&login=<?=$user->getLogin()?>"><i class="fas fa-edit"></i></a></td>
             <td class="col-md-1"><a href="<?=BASE_URL?>user/delete&login=<?=$user->getLogin()?>"><i class="fas fa-times"></i></a></td>
         </tr>

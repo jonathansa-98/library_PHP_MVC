@@ -1,5 +1,4 @@
 <?php
-
 class User {
     
     private $login;
@@ -7,7 +6,6 @@ class User {
     private $dni;
     private $email;
     private $role;
-    // db conexion to use in db related tasks.
     private $db;
     
     public function __construct() {

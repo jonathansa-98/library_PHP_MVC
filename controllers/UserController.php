@@ -1,6 +1,8 @@
 <?php
 
 require_once 'models/User.php';
+require_once 'models/Reserve.php';
+require_once 'models/Book.php';
 
 class UserController{
     
@@ -158,5 +160,22 @@ class UserController{
         }else{
             header('Location:'.BASE_URL);
         }
+    }
+    
+    function reserves(){
+        Utils::restrictNotLoged();
+        Utils::restrictNormalUser();
+        if(isset($_GET['login'])){
+            $book = new Book();
+            $books = $book->getAll();
+            $login = $_GET['login'];
+            $reserve = new Reserve();
+            $reserve->setUser_login($login);
+            $reserves = $reserve->getAllReservesByUserLogin();
+            require_once 'views/user/reserves.php';
+        }else{
+            header('Location:'.BASE_URL);
+        }
+        
     }
 }

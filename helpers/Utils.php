@@ -79,4 +79,11 @@ class Utils{
         preg_match('/^([^.!?\s]*[\.!?\s]+){0,'.$limit.'}/', strip_tags($text), $container);
         return strlen($container[0]) < strlen($text) ? $container[0]." ...":$text;
     }
+    
+    static function canUserGoToReserve() {
+        if (Utils::isNormalUser() || Utils::isLibrarian()){
+            return true;
+        }
+        return false;
+    }
 }
