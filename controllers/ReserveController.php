@@ -49,13 +49,16 @@ class ReserveController{
             $reserve->calcNCopies();
             
             $result = $reserve->checkDates($dateMinusMaxDays, $datePlusMaxDays);
-            
-            if($result){
-                // Creates Reserve
-                $reserve->add();
-                $_SESSION['state_reserve'] = "Success reserving the book.";
+            if ($reserve->getNCopiesByUserLogin($reserve->getUser_login()) < COPIES){
+                if($result){
+                    // Creates Reserve
+                    $reserve->add();
+                    $_SESSION['state_reserve'] = "Success reserving the book.";
+                } else {
+                    $_SESSION['state_reserve'] = "Error, there are no copies available in $userDate, try another date.";
+                }
             }else{
-                $_SESSION['state_reserve'] = "Error, there are no copies available in $userDate, try another date.";
+                $_SESSION['state_reserve'] = "Error, you have reached maximum number of reserves";
             }
             header('Location:'.BASE_URL.'reserve/create&id='.$id);
         }

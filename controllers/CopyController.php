@@ -49,20 +49,13 @@ class CopyController{
         Utils::restrictNormalUser();
         $success_msg = "Success creating copy.";
         $error_msg = "Error, creating copy.";
-        $max_copies_msg = "You have reached maximum number of copies";
         
         if(isset($_GET['book_id'])){
             $copy = new Copy();
             $copy->setBookId($_GET['book_id']);
-            // check if the number of copies is greater than the maximum
-            if ($copy->getNCopiesByBookId($copy->getBookId())+0 < COPIES){
-                $save = $copy->save();
-                $_SESSION['status_copy'] = $save ? $success_msg:$error_msg;
-                header('Location:'.BASE_URL.'copy/manage&book_id='.$_GET['book_id']);
-            } else {
-                $_SESSION['status_copy'] = $max_copies_msg;
-                header('Location:'.BASE_URL.'copy/manage&book_id='.$_GET['book_id']);
-            }
+            $save = $copy->save();
+            $_SESSION['status_copy'] = $save ? $success_msg:$error_msg;
+            header('Location:'.BASE_URL.'copy/manage&book_id='.$_GET['book_id']);
         }else{
             header('Location:'.BASE_URL.'book/manage');
         }

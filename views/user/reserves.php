@@ -22,8 +22,11 @@
                     <?php endif; ?>
                 <?php endwhile;?>
                 <td class="col-md-3"><?=$reserve->getReservation_date()?></td>
-                <!--<td class="col-md-1"><a href="<?=BASE_URL?>borrow/add"><i class="fas fa-plus"></i></a></td>-->
                 <td class="col-md-1"><a href="#"><i class="fas fa-plus"></i></a></td>
+                <td class="col-md-1">
+                    <input type="checkbox" name="returned"/>
+                </td>
+        
             </tr>
             <?php endwhile; ?>
         </tbody>

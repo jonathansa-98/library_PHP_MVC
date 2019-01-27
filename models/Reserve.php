@@ -84,10 +84,18 @@ class Reserve{
         if($this->checkDateBefore($date1) && $this->checkDateAfter($date2)) return true;
         return false;
     }
+    
     function getAllReservesByUserLogin(){
         $sql = "select * from reserve where user_login='{$this->user_login}'";
         $result = $this->db->query($sql);
         return $result;
+    }
+    
+    function getNCopiesByUserLogin($login) {
+        $sql = "select count(*) as total from reserve where user_login='{$login}';";
+        $result = $this->db->query($sql);
+        $count = $result->fetch_assoc();
+        return $count['total'];
     }
 }
 
