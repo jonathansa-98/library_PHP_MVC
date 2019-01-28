@@ -86,4 +86,16 @@ class Utils{
         }
         return false;
     }
+    
+    static function getBookNameById($id) {
+        require_once 'models/Book.php';
+        $sql = "SELECT * FROM book WHERE id={$id};";
+        $book = new Book();
+        $book->setId($id);
+        $result = $book->getOne();
+        
+        $result = $book->getDb()->query($sql);
+        $book = $result->fetch_object("Book");
+        return $book->getName();
+    }
 }

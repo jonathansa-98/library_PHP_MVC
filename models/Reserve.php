@@ -86,7 +86,7 @@ class Reserve{
     }
     
     function getAllReservesByUserLogin(){
-        $sql = "select * from reserve where user_login='{$this->user_login}'";
+        $sql = "select * from reserve where user_login='{$this->user_login}';";
         $result = $this->db->query($sql);
         return $result;
     }

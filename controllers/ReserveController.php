@@ -58,7 +58,7 @@ class ReserveController{
                     $_SESSION['state_reserve'] = "Error, there are no copies available in $userDate, try another date.";
                 }
             }else{
-                $_SESSION['state_reserve'] = "Error, you have reached maximum number of reserves";
+                $_SESSION['state_reserve'] = "Error, you have reached maximum number of reserves.";
             }
             header('Location:'.BASE_URL.'reserve/create&id='.$id);
         }

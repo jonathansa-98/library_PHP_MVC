@@ -26,7 +26,7 @@
         <tr>
             <td class="col-md-1"><?=$copy->getId()?></td>
             <td class="col-md-1"><?=$copy->getBookId()?></td>
-            <td class="col-md-1"><?=$book->getName()?></td>
+            <td class="col-md-3"><?=$book->getName()?></td>
             <td class="col-md-1"><a href="<?=BASE_URL?>copy/delete&book_id=<?=$book->getId()?>&id=<?=$copy->getId()?>"><i class="fas fa-times"></i></a></td>
         </tr>
         <?php endwhile; ?>

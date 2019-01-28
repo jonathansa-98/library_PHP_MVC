@@ -18,15 +18,15 @@
     
     <form class="form-group" action="<?=BASE_URL?>user/saveUpdate&login=<?=$user->getLogin()?>" method="POST">
         <div class="form-group">
-            <label for="login">Login<i class="text-danger">*</i></label>
+            <label for="login">Login</label>
             <input class="form-control" type="text" name="login" disabled="" value="<?=$user->getLogin()?>"/>
         </div>
         <div class="form-group">
-            <label for="dni">DNI<i class="text-danger">*</i></label>
+            <label for="dni">DNI</label>
             <input class="form-control" type="text" name="dni" required="" value="<?=$user->getDni()?>"/>
         </div>
         <div class="form-group">
-            <label for="email">Email<i class="text-danger font-weight-bold">*</i></label>
+            <label for="email">Email</label>
             <input class="form-control" type="email" name="email" required="" value="<?=$user->getEmail()?>"/>
         </div>
         <input type="submit" name="update" value="Update" class="btn btn-primary mb-2"/>
