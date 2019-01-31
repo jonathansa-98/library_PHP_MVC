@@ -38,6 +38,9 @@
             <?php endwhile; ?>
             </select>
         </div>
+        <?php else: ?>
+        <label for="user">For user</label>
+        <input class="form-control" type="text" name="user" value="<?=$_SESSION['userIdentity']->getLogin()?>" readonly=""/>
         <?php endif;?>
         <input class="btn btn-primary mb-2" type="submit" value="Reserve"/>
     </form>
