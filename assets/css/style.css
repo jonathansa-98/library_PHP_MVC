@@ -144,6 +144,10 @@ form{
     width: 90% !important;
 }
 
+.table i{
+    font-size: 20px;
+}
+
 /* Footer css*/
 footer{
     text-align: center;

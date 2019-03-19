@@ -17,10 +17,8 @@
             <td class="col-md-1"><?=$reserve->getBook_id()?></td>
             <td class="col-md-3"><?=Utils::getBookNameById($reserve->getBook_id())?></td>
             <td class="col-md-2"><?=$reserve->getReservation_date()?></td>
-            <td class="col-md-1"><a href="#"><i class="fas fa-plus"></i></a></td>
-            <td class="col-md-1">
-                <input type="checkbox" name="returned"/>
-            </td>
+            <td class="col-md-1"><a href="#"><i class="fas fa-calendar-plus"></i></a></td>
+            <td class="col-md-1"><a href="#"><i class="fas fa-calendar-minus"></i></a></td>
         </tr>
         <?php endwhile; ?>
     </table>

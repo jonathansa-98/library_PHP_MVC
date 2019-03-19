@@ -89,7 +89,7 @@ class Book {
         return $book->fetch_object("Book");
     }
     
-    function checkIfBookIdExists(){
+    public function checkIfBookIdExists(){
         $sql = "SELECT * FROM book WHERE id={$this->id}";
         $result = $this->db->query($sql);
         if (is_object($result)){

@@ -66,14 +66,14 @@ class Reserve{
     }
     
     private function checkDateBefore($date){
-        $sql = "select count(*) as total from reserve where user_login='{$this->user_login}' and reservation_date between '$date' and '{$this->reservation_date}';";
+        $sql = "select count(*) as total from reserve where book_id='{$this->book_id}' and reservation_date between '$date' and '{$this->reservation_date}';";
         $result = $this->db->query($sql);
         $count = $result->fetch_assoc();
         if($count['total'] < $this->n_copies) return true;
         else return false;
     }
     private function checkDateAfter($date){
-        $sql = $sql = "select count(*) as total from reserve where user_login='{$this->user_login}' and reservation_date between '{$this->reservation_date}' and '{$date}';";
+        $sql = $sql = "select count(*) as total from reserve where book_id='{$this->book_id}' and reservation_date between '{$this->reservation_date}' and '{$date}';";
         $result = $this->db->query($sql);
         $count = $result->fetch_assoc();
         if($count['total'] < $this->n_copies) return true;
