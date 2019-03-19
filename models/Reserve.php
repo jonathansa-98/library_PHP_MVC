@@ -97,5 +97,12 @@ class Reserve{
         $count = $result->fetch_assoc();
         return $count['total'];
     }
+    
+    function getReserveById() {
+        $sql = "select * from reserve where id='{$this->id}';";
+        $result = $this->db->query($sql);
+        $res= $result->fetch_object("Reserve");
+        return $res;
+    }
 }
 

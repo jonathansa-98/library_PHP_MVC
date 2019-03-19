@@ -61,16 +61,42 @@ class Borrow {
         $this->db = $db;
     }
     
-    // TODO: pass the id of the book and check the next copy that can be borrowed
-    function checkNextCopyAvailable() {
-        $sql = "select * from borrow where user_login='{$this->user_login}';";
+    // Return an array of ints with the ids of the copies from the book_id
+    function getCopiesByBookId($bookId) {
+        $sql = "SELECT id FROM book_copy WHERE book_id={$bookId};";
         $result = $this->db->query($sql);
-        return $result;
+        $ids = array();
+        if(is_object($result) && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $ids[] = intval($row['id']);
+            }
+        } else {
+            $ids[] = -1;
+        }
+        return $ids;
+    }
+
+    // TODO: pass the id of the book and check the next copy that can be borrowed
+    function getCopyAvailable($copies, $reserve_date) {
+        foreach ($copies as $copy) {
+            $sql = "select * from borrow where book_copy_id={$copy};";
+            $result = $this->db->query($sql);
+            if($result->num_rows == 0){
+                return $copy;
+            } else {
+                $sql = "select * from borrow where book_copy_id={$copy} and "
+                . "return_date IS NOT NULL;";
+                $result = $this->db->query($sql);
+                if($result->num_rows == 0) return $copy;
+            }
+        }
+        return -1;
     }
         
     function add(){
-        $sql = "insert into borrow values(null, '{$this->user_login}', {$this->book_copy_id}, null, null}');";
-        $this->db->query($sql);
+        $sql = "insert into borrow values({$this->id}, '{$this->user_login}', "
+             . "{$this->book_copy_id}, NOW(), null);";
+        return $this->db->query($sql);
     }
 
 }
